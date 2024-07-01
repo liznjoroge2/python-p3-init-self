@@ -1,29 +1,23 @@
-#!/usr/bin/env python3
+# lib/dog_test.py
 
-from dog import Dog
+import pytest
+from lib.dog import Dog
 
 class TestDog:
-    '''Dog in dog.py'''
-
     def test_is_class(self):
         '''is a class with the name "Dog"'''
-        fido = Dog("Fido")
-        assert(type(fido) == Dog)
-
-class TestInit:
-    '''Dog.__init__ in dog.py'''
-
-    def test_saves_self_name(self):
-        '''takes a name as an argument and saves it to self.name'''
-        fido = Dog("Fido")
-        assert(fido.name == "Fido")
-
-    def test_saves_self_breed(self):
-        '''takes a breed as an argument and saves it to self.breed'''
-        fido = Dog("Fido", "Dalmatian")
-        assert(fido.breed == "Dalmatian")
+        fido = Dog(name="Fido", breed="Labrador")
+        assert isinstance(fido, Dog)
+        assert fido.name == "Fido"
+        assert fido.breed == "Labrador"
 
     def test_default_breed(self):
-        '''sets self.breed = "Mutt" when no breed specified'''
-        fido = Dog("Fido")
-        assert(fido.breed == "Mutt")
+        '''Dog.__init__ should default breed to "Mutt"'''
+        fido = Dog(name="Fido")
+        assert fido.breed == "Mutt"
+
+    def test_sit_method(self):
+        '''Dog class has a sit method'''
+        fido = Dog(name="Fido", breed="Labrador")
+        assert hasattr(fido, 'sit')
+        fido.sit()

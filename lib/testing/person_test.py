@@ -1,19 +1,23 @@
-#!/usr/bin/env python3
+# lib/person_test.py
 
-from person import Person
+import pytest
+from lib.person import Person
 
 class TestPerson:
-    '''Person in person.py'''
-
     def test_is_class(self):
         '''is a class with the name "Person"'''
-        guido = Person("Guido")
-        assert(type(guido) == Person)
+        john = Person(name="John")
+        assert isinstance(john, Person)
+        assert john.name == "John"
 
-class TestInit:
-    '''Person.__init__ in person.py'''
+    def test_talk_method(self):
+        '''Person class has a talk method'''
+        john = Person(name="John")
+        assert hasattr(john, 'talk')
+        john.talk()
 
-    def test_saves_self_name(self):
-        '''takes a name as an argument and saves it to self.name'''
-        guido = Person("Guido")
-        assert(guido.name == "Guido")
+    def test_walk_method(self):
+        '''Person class has a walk method'''
+        john = Person(name="John")
+        assert hasattr(john, 'walk')
+        john.walk()
